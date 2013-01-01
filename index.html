@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Timepoke</title>
+    <link rel="stylesheet" type="text/css" href="../lib/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../lib/bootstrap/css/bootstrap-responsive.css">
+	<script src="../lib/require.js" data-main="client.js"></script>
+	<style type="text/css">
+	    /* no! should be in a separate file! ahh! */
+	    .duration-value[data-running] {
+	        color: red;
+	    }
+	</style>
+</head>
+<body>
+    <div class="container">
+        <h1> Timepoke </h1>
+        <h2> Activities </h2>
+        
+        <div id="activities"></div>
+        <script id="activity-template" type="text/x-handlebars-template">
+        {{#if activities.length}}
+        <table class="table table-striped">
+            <tr>
+                <th> Activity </th>
+                <th> Duration </th>
+                <th></th>
+            </tr>
+        {{#each activities}}
+            <tr data-activity="{{name}}">
+                <td> {{name}} </td>
+                <td>
+                    {{> duration}}
+                </td>
+                <td>
+                {{#if running}}
+                    <button id="stop-activity" class="btn btn-danger pull-right">Stop</button>
+                {{else}}
+                    <button id="start-activity" class="btn btn-success pull-right">Start</button>
+                {{/if}}
+                </td>
+            </tr>
+        {{/each}}
+        {{/if}}
+        </table>
+        </script>
+        <script id="duration-template" type="text/x-handlebars-template">
+            <span class="duration-value" {{#if running}}data-running="true" data-duration-ms="{{durationMs}}"{{/if}}>
+                {{#if duration.weeks}}{{duration.weeks}}w{{/if}} 
+                {{#if duration.days}}{{duration.days}}d{{/if}} 
+                {{#if duration.hours}}{{duration.hours}}h{{/if}} 
+                {{#if duration.minutes}}{{duration.minutes}}m{{/if}} 
+                {{#if duration.seconds}}{{duration.seconds}}s{{/if}}
+            </span>
+        </script>
+        
+        <form>
+            <button id="new-activity" class="btn">New activity</button>
+        </form>
+        
+        <form id="new-activity-form" class="form-inline" style="display: none">
+            <label for="activityName">Name</label> <input id="activityName" type="text">
+            <button id="create-activity" class="btn btn-primary">Create</button>
+            <button id="cancel-new-activity" class="btn">Cancel</button>
+        </form>
+    </div>
+</body>
+</html>
