@@ -10,12 +10,27 @@
 	    .duration-value[data-running] {
 	        color: red;
 	    }
+	    #date-range-form {
+	        white-space: nowrap;
+	    }
 	</style>
 </head>
 <body>
     <div class="container">
         <h1> Timepoke </h1>
         <h2> Activities </h2>
+        
+        <form id="date-range-form" class="form-inline">
+            <label for="activityName">Date range:</label>
+            <input id="startDate" class="input-small" type="text">
+            <input id="endDate" class="input-small" type="text">
+            <span>
+                <button id="today" class="btn btn-link">Today</button>
+                <button id="thisWeek" class="btn btn-link">This week</button>
+                <button id="last2Weeks" class="btn btn-link">Last two weeks</button>
+                <button id="thisMonth" class="btn btn-link">This month</button>
+            </span>
+        </form>
         
         <div id="activities"></div>
         <script id="activity-template" type="text/x-handlebars-template">
