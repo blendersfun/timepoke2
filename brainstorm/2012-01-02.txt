@@ -1,0 +1,88 @@
+
+ 12:32 - Started working on one project
+ 1:40 - Switched to a different project
+ 2:30 - Helped someone for a bit
+ 3:00 - Back to first project
+ 4:00 - Finished working
+ 
+ Track | Review | Tweak
+ 
+ TRACK
+   Date range
+   Activities
+   _ActivityOne_ Duration [Note] Start/Stop
+   _ActivityTwo_ Duration [Note] Start/Stop
+   New Activity
+    Name | Parent Activity
+   
+ 
+ REVIEW
+   Date range
+   Activity selector
+   Aggregate
+     Week 1st - 8th
+       note
+       1st | 8h | note
+                  note
+                  note (more)
+       2nd | 8h | 
+       3rd | 7h |
+       4th | 9h | 
+       5th | 8h | note
+     Week 9th - 16th
+       note
+       9th  | 8h | note
+       10th | 7h |
+    
+ TWEAK
+   Date range
+   Activity selector
+   1:20pm - 2:45pm | Note (edit)
+   New Session
+ 
+
+ How do I manage sessions so that they are easy to query?
+  GetData
+  SaveData
+  
+  Data:
+   Activities
+  
+  Activity:
+   Sessions
+   SubActivities
+   Notes
+   .getDuration() // gets ms for sessions + all sub-activities sessions
+                  // always relative to application date range
+   .isRunning()
+   .createNote(text, [session|time, aggregateType])
+   .report(aggregateType) // gets a list of aggregates
+   
+  Session:
+   Start
+   Stop
+   Note
+  
+  Note:
+   Text
+   Time // only used with activity-notes
+   Type // only used with activity-notes
+  
+  // a slave type: a particular view of an activity
+  Aggregate:
+   Start
+   Stop
+   Sessions
+   AggregateType
+   Note
+   SubAggregates
+   .getDuration()
+   .isRunning()
+   .createNote() // proxy to activity-notes
+   
+  Objects that can be running have a "isRunning" and a "getDuration".
+  Only objects that can be running will ever have their duration printed.
+  If a duration is running, on each tick event the duration will be updated.
+  This will be done by getting that duration's object by using $(el).data() 
+  and running getDuration on it, and then rerendering it.
+  

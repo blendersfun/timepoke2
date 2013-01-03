@@ -1,4 +1,10 @@
 
+==========
+ Timepoke
+==========
+
+ A simple time tracking device.
+
 ======================
  Notes about TimePoke
 ======================

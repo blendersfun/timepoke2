@@ -1,62 +1,5 @@
 "use strict";
 
-/* The configuration file for require.js module loading.
- * Also launches the application.
- */
- 
-var libBase = "../../../lib/";
-
-requirejs.config({
-    baseUrl: "src/js",
-    paths: {
-        "jquery":        libBase + "jquery-1.8.3",
-        "jquery.cookie": libBase + "jquery.cookie",
-        "backbone":      libBase + "backbone",
-        "underscore":    libBase + "underscore",
-        "handlebars":    libBase + "handlebars-1.0.rc.1",
-        "text":          libBase + "require-text",
-        "domReady":      libBase + "require-domReady",
-        "bootstrap":     libBase + "bootstrap/js/bootstrap",
-        "moment":        libBase + "moment"
-    },
-    shim: {
-        "jquery": {
-            exports: "$"
-        },
-        "jquery.cookie": {
-            deps: ["jquery"]
-        },
-        "underscore": {
-            exports: "_"
-        },
-        "backbone": {
-            deps: ["underscore", "jquery"],
-            exports: "Backbone"
-        },
-        "handlebars": {
-            exports: "Handlebars"
-        },
-        "bootstrap": {
-            deps: ["jquery"]
-        },
-        "moment": {
-            exports: "moment"
-        }
-    }
-});
-
-require([
-    "domReady", 
-    "jquery", 
-    "backbone", 
-    "handlebars", 
-    "bootstrap",
-    "moment",
-    "jquery.cookie"
-], function (domReady) {
-    domReady(start);
-});
-
 // Constants
 var STORE_TIME_FORMAT = 'MM-DD-YYYY, h:mm:ss a',
     INPUT_TIME_FORMAT = 'M-D-YYYY',
@@ -119,7 +62,7 @@ function start () {
                             stop = moment(session.stop, STORE_TIME_FORMAT).toDate();
                         }
                         
-                        if (start < app.endDate || stop > app.startDate) {
+                        if (start < app.endDate && stop > app.startDate) {
                             if (!stop) {
                                 stop = new Date();
                             }
