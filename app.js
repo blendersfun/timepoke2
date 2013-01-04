@@ -61,11 +61,13 @@ function start () {
                         if (session.stop) {
                             stop = moment(session.stop, STORE_TIME_FORMAT).toDate();
                         }
+                        if (!stop) {
+                            stop = new Date();
+                        }
                         
-                        if (start < app.endDate && stop > app.startDate) {
-                            if (!stop) {
-                                stop = new Date();
-                            }
+                        var inPast = start < app.startDate && stop < app.startDate,
+                            inFuture = start > app.endDate && stop > app.endDate;
+                        if (!inPast && !inFuture) {
                             if (start < app.startDate) {
                                 start = app.startDate;
                             }
